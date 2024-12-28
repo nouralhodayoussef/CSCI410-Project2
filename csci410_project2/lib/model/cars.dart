@@ -7,15 +7,9 @@ class Car {
   final String imageUrl;
 
 
-  Car({
-    required this.id,
-    required this.name,
-    required this.brand,
-    required this.price,
-    required this.description,
-    required this.imageUrl,
-  });
+ Car(this.id, this.name, this.brand, this.price, this.description, this.imageUrl, );
 
-  List<Car> carsList = [];
+  List<Car> carsList = []; 
+
 
 }
