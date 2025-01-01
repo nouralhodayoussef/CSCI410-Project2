@@ -1,9 +1,9 @@
-import 'package:csci410_project2/PriceFilterScreen.dart';
 import 'package:flutter/material.dart';
-
+import 'CarCard.dart';
 import 'API/api.dart';
-import 'CarDetails.dart';
 import 'model/cars.dart';
+import 'PriceFilterScreen.dart';
+import 'requestCar.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -55,22 +55,31 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-  title: const Text("Cars List"),
-  centerTitle: true,
-  backgroundColor: const Color.fromARGB(255, 20, 82, 113),
-  foregroundColor: Colors.white,
-  actions: [
-    IconButton(
-      icon: const Icon(Icons.search),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => PriceFilterScreen()),
-        );
-      },
-    ),
-  ],
-),
+        title: const Text("Cars List"),
+        centerTitle: true,
+        backgroundColor: const Color.fromARGB(255, 20, 82, 113),
+        foregroundColor: Colors.white,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => PriceFilterScreen()),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => RequestCarScreen()),
+              );
+            },
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Container(
@@ -117,87 +126,10 @@ class _HomepageState extends State<Homepage> {
                     itemCount: filteredCarsList.length,
                     itemBuilder: (context, index) {
                       final car = filteredCarsList[index];
-                      return Card(
-                        margin: const EdgeInsets.symmetric(
-                            vertical: 8.0, horizontal: 16.0),
-                        elevation: 4,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: ListTile(
-                          contentPadding: const EdgeInsets.symmetric(
-                              vertical: 12.0, horizontal: 16.0),
-                          leading: ClipRRect(
-                            borderRadius: BorderRadius.circular(8.0),
-                            child: Image.network(
-                              car.imageUrl,
-                              width: 60,
-                              height: 60,
-                              fit: BoxFit.cover,
-                              loadingBuilder:
-                                  (context, child, loadingProgress) {
-                                if (loadingProgress == null) return child;
-                                return Center(
-                                  child: CircularProgressIndicator(
-                                    value: loadingProgress.expectedTotalBytes !=
-                                            null
-                                        ? loadingProgress
-                                                .cumulativeBytesLoaded /
-                                            (loadingProgress
-                                                    .expectedTotalBytes ??
-                                                1)
-                                        : null,
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          title: Text(
-                            car.name,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          subtitle: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                car.brand,
-                                style: TextStyle(
-                                  color: Colors.grey[600],
-                                  fontSize: 14,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                "\$${car.price.toStringAsFixed(2)}",
-                                style: const TextStyle(
-                                  color: Colors.green,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                          trailing: Icon(
-                            Icons.arrow_forward_ios,
-                            size: 20,
-                            color: Colors.blue[700],
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => CarDetails(car: car),
-                              ),
-                            );
-                          },
-                        ),
-                      );
+                      return CarCard(car: car);
                     },
                   ),
-          )
+          ),
         ],
       ),
     );

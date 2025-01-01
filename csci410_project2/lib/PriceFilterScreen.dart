@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'model/cars.dart';
 import 'API/api.dart';
+import 'CarCard.dart';
 
 class PriceFilterScreen extends StatefulWidget {
   @override
@@ -73,7 +74,10 @@ class _PriceFilterScreenState extends State<PriceFilterScreen> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color.fromARGB(255, 20, 82, 113),
               ),
-              child: const Text("Search"),
+              child: const Text(
+                "Search",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
             const SizedBox(height: 16),
             isLoading
@@ -85,20 +89,7 @@ class _PriceFilterScreenState extends State<PriceFilterScreen> {
                             itemCount: carsList.length,
                             itemBuilder: (context, index) {
                               final car = carsList[index];
-                              return Card(
-                                margin: const EdgeInsets.symmetric(
-                                    vertical: 8.0, horizontal: 16.0),
-                                child: ListTile(
-                                  leading: Image.network(
-                                    car.imageUrl,
-                                    width: 60,
-                                    height: 60,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  title: Text(car.name),
-                                  subtitle: Text("\$${car.price.toStringAsFixed(2)}"),
-                                ),
-                              );
+                              return CarCard(car: car);
                             },
                           ),
                   ),
