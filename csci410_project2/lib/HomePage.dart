@@ -1,3 +1,4 @@
+import 'package:csci410_project2/PriceFilterScreen.dart';
 import 'package:flutter/material.dart';
 
 import 'API/api.dart';
@@ -54,11 +55,22 @@ class _HomepageState extends State<Homepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cars List"),
-        centerTitle: true,
-        backgroundColor: const Color.fromARGB(255, 20, 82, 113),
-        foregroundColor: Colors.white,
-      ),
+  title: const Text("Cars List"),
+  centerTitle: true,
+  backgroundColor: const Color.fromARGB(255, 20, 82, 113),
+  foregroundColor: Colors.white,
+  actions: [
+    IconButton(
+      icon: const Icon(Icons.search),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => PriceFilterScreen()),
+        );
+      },
+    ),
+  ],
+),
       body: Column(
         children: [
           Container(

@@ -16,7 +16,7 @@ class _SplashPageState extends State<SplashPage> {
     return EasySplashScreen(
       logo: Image.asset('imgs/logo.png'),
       title: Text(
-        'LUX Cars',
+        'Car Gallery',
         style: TextStyle(
           color: const Color.fromARGB(255, 20, 82, 113),
           fontFamily: 'ro',
