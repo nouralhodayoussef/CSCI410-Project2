@@ -15,8 +15,8 @@ class _RequestCarScreenState extends State<RequestCarScreen> {
   final TextEditingController carDetailsController = TextEditingController();
 
   Future<void> submitRequest() async {
-    final url = Uri.parse(
-        'http://localhost/cars/csci410-project2/request_car.php');
+    final url = Uri.http(
+        'csci410cargallery.atwebpages.com','/request_car.php');
 
     final response = await http.post(
       url,

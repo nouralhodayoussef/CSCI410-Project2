@@ -8,7 +8,7 @@ List<Car> carsList = [];
 
 Future<List<Car>> fetchData() async {
   try {
-    final url = Uri.http('localhost', 'cars/csci410-project2/getCars.php');
+    final url = Uri.http("csci410cargallery.atwebpages.com","/getCars.php");
     final response = await http.get(url);
 
     if (response.statusCode == 200) {
@@ -38,10 +38,14 @@ Future<List<Car>> fetchData() async {
 
 Future<List<Car>> fetchCarsByPriceRange(
     double minPrice, double maxPrice) async {
-  final url = Uri.http('localhost', 'cars/csci410-project2/getCarsByPrice.php', {
+  final url = Uri.http(
+  'csci410cargallery.atwebpages.com',
+  '/getCarsByPrice.php',
+  {
     'min_price': minPrice.toString(),
     'max_price': maxPrice.toString(),
-  });
+  },
+);
 
   final response = await http.get(url);
 
@@ -56,7 +60,7 @@ Future<List<Car>> fetchCarsByPriceRange(
         row['brand'] ?? 'Unknown',
         double.tryParse(row['price'].toString()) ?? 0.0, 
         row['description'] ?? '',
-        row['url'] ?? 'imgs/tesla-model-3.png', 
+        row['url'] ?? 'imgs/logo.png', 
       );
       carsList.add(car);
     }
